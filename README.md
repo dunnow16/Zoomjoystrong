@@ -1,5 +1,5 @@
 # Zoomjoystrong
-Interpretive language created using Flex and Bison to draw using SDL2.<br />
+Interpretive language created using Flex and Bison to draw (like Microsoft Paint) using SDL2.<br />
 
 Compile: <br />
 bison -d zoomjoystrong.y <br />

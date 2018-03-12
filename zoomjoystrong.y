@@ -43,10 +43,10 @@
 
 /*
  * RULES: Define the context-free grammar. C-code is run as instances
- *   	  of the rules are found. This code run is listed after each
+ *   	  of the rules are found. The code run is listed after each
  *	  defined rule. Error checking is included within the code to
  *	  make sure user input is within the proper screen dimensions
- *	  for drawing. 
+ *	  for drawing and color values are valid. 
  */
 %%
 
@@ -100,7 +100,7 @@ draw_circle: CIRCLE number number number
 	     {
 	     printf("Drawing circle: about point x=%d, y=%d ", 
 		     $2, $3);
-	       printf("with radius r=%d.\n", $4);
+	       printf("with\nradius r=%d.\n", $4);
 	     if ($2 > WIDTH || $2 < 0)
 		printf("Error: %d outside of width range.\n", $2);
 	     else if ($3 > HEIGHT || $3 < 0)
@@ -118,7 +118,7 @@ draw_rectangle: RECTANGLE number number number number
 		{
 		printf("Drawing rectangle: from upper left corner");
 		  printf(" x=%d, y=%d, ", $2, $3);
-		  printf("width=%d, height=%d.\n", $4, $5);
+		  printf("\nwidth=%d, height=%d.\n", $4, $5);
 		if ( ($2 + $4) > WIDTH ) {
 		    printf("Error: Rectangle would reach outside ");
 		      printf("screen.\n");
@@ -162,11 +162,11 @@ number: INT
  * Parse the tokens and do appropriate actions based on the defined
  * context free grammar above. When a matching sentence is found, as
  * defined above, the blocked code will run to control the drawing 
- * program if no error are found. SDL2 functions are used to draw the
+ * program if no errors are found. SDL2 functions are used to draw the
  * patterns as defined in the "zoomjoystrong.h" file. The user may
  * provide a program filled with statements to draw or provide one
- * statement at a time. The drawing process stops with "END" is 
- * provided as a statement. The syntax of the zoomjoystrong language
+ * statement at a time. The drawing process stops when "end" is 
+ * provided as a statement. The syntax of the Zoomjoystrong language
  * is defined in the Flex file.
  *
  * param:  zjs input file or zjs statements from a command line
@@ -179,15 +179,15 @@ int main(int argc, char** argv) {
     printf("Valid statements:\n");
     printf("1. \"line x y u v\": plot a line from x,y to u,v\n");
     printf("2. \"point x y\":  plot a point at x,y\n");
-    printf("3. \"circle x y r\": plot a circle of radius r around ");
+    printf("3. \"circle x y r\": plot a circle of radius r around\n");
       printf("point x,y\n");
-    printf("4. \"rectangle x y w h\": draw a rectangle of height h ");
-      printf("and width w \nbeginning at the top left edge x,y\n");
-    printf("5. \"set_color\": change the current drawing color to ");
+    printf("4. \"rectangle x y w h\": draw a rectangle of height h\n");
+      printf("and width w beginning at the top left edge x,y\n");
+    printf("5. \"set_color\": change the current drawing color to\n");
       printf("the r,g,b tuple\n");
     printf("Enter \"end\" to stop.\n\n");
 
-    setup(); /* Set up drawing display. */
+    setup();   /* Set up drawing display. */
     yyparse(); /* Parse the tokens */
     printf("Drawing complete.\n\n");
     finish();  /* Wait 5 seconds, close window, and quit. */
@@ -198,7 +198,7 @@ int main(int argc, char** argv) {
 
 /**
  * This function is used to print syntax error messages to the user.
- * The error function must be defined for Bison.
+ * This function must be defined for Bison.
  * 
  * param:  msg (string)
  * return: none

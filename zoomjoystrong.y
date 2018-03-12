@@ -186,6 +186,7 @@ int main(int argc, char** argv) {
     printf("5. \"set_color\": change the current drawing color to\n");
       printf("the r,g,b tuple\n");
     printf("Enter \"end\" to stop.\n\n");
+    printf("Press CTRL-d to send EOF signal if running from terminal.\n");
 
     setup();   /* Set up drawing display. */
     yyparse(); /* Parse the tokens */
